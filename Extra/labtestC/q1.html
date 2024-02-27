@@ -1,0 +1,118 @@
+<!--
+
+ Name:
+ Email:
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Big Bang</title>
+    <!-- Vue.js 3 CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="main">
+
+        <table border='1'>
+
+            <!-- DO NOT MODIFY THIS -->
+            <tr>
+                <td colspan='3' align='center'>
+                    <h3>Step 1: Select Celebrity</h3>
+                </td>
+            </tr>
+
+
+            <!-- YOU NEED TO MODIFY THE BELOW -->
+            <tr>
+                <td v-for="celeb in available_celebs">
+                    <img :src="celeb">
+                </td>
+            </tr>
+
+
+            <!-- YOU NEED TO MODIFY THE BELOW -->
+            <tr>
+                <td v-for="(value, key) in available_celebs">
+                    <input type="radio" v-model="selected_celeb" :id="key" :value="key">
+                    <label :for="key"> {{key}} </label>
+                </td>
+            </tr>
+
+
+            <!-- DO NOT MODIFY THIS -->
+            <tr>
+                <td colspan='3' align='center'>
+                    <h3>Step 2: Choose Activities</h3>
+                </td>
+            </tr>
+
+
+            <!-- YOU NEED TO MODIFY THE BELOW -->
+            <tr>
+                <td v-for="activity in available_activities">
+                    <!-- v-model listens to value -->
+                    <input type="checkbox" v-model="selected_activities" :id="activity.name" :value="activity"> <label :for="activity.name"> {{activity.name}} (${{activity.price}}) </label>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <hr>
+
+
+
+        <!-- Bill Table Must Show Here -->
+        <!-- YOU NEED TO MODIFY THE BELOW -->
+        <!-- bracket means event listener, no bracket will j happen -->
+        <div  v-if="total_bill">
+            <h1>Your Bill</h1>
+            <table border="1">
+                <tr>
+                    <th colspan="2">
+                        Your Fan Request
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <img :src="available_celebs[selected_celeb]">
+                    </td>
+                    <td>
+                        {{selected_celeb}}
+                    </td>
+                </tr>
+                <tr v-for="eachActivity in selected_activities">
+                    <td>
+                        {{eachActivity.name}}
+                    </td>
+                    <td>
+                        ${{eachActivity.price}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        ${{total_bill}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+            
+
+
+
+
+    </div>
+
+
+
+    <!-- External (local) JavaScript -->
+    <script src="q1.js"></script>
+</body>
+</html>
