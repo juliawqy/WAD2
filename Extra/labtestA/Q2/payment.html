@@ -1,0 +1,201 @@
+<!--
+    
+Name:   
+Email:  
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP CSS
+    -->
+    <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+
+    <title>Q2 - Payment</title>
+</head>
+<body>
+
+
+    
+    <!-- Image and Page Header -->
+    <div class="row text-center">
+
+        <div>
+            <img src="logo.jpg" class="rounded-circle w-10">
+        </div>
+        <div>
+            <h2>Checkout</h2>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">  
+
+        <div class="col-md-6 col-lg-8 bg-dark text-white order-last order-md-first">
+            <!-- Billing Form -->
+            <div class="row m-0 px-3">
+                <h4 class="pt-3 pb-2">Billing address</h4>
+                <div class="row pb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label" for="firstName">First name</label>
+                        <input class="w-100 form-control" type="text"id="firstName" placeholder="" value="" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label" for="lastName">Last name</label>
+                        <input class="w-100 form-control" type="text" id="lastName" placeholder="" value="" required>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col">
+                        <label class="form-label" for="address">Address</label>
+                        <input class="w-100 form-control" type="text" id="address" placeholder="1234 Main St" required>
+                    </div>
+                </div>
+                
+                <div class="row pb-2">
+                    <div class="col-md-6">
+                        <label class="form-label" for="country">Country</label>
+                        <select class="form-select w-100 " id="country" required>
+                            <option value="">Choose...</option>
+                            <option>Canada</option>
+                            <option>Singapore</option>
+                            <option>United States</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="postal">Postal Code</label>
+                        <input class="w-100 form-control" type="text" id="postal" placeholder="" required>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+
+
+
+            <div class="row m-0 px-3">
+                <h4 class="py-2">Credit Card</h4>
+                <div class="row pb-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="cc-name">Name on card</label>
+                        <input class="w-100 form-control" type="text" id="cc-name" placeholder="" required>
+                        <small class="text-secondary">Full name as displayed on card</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="cc-number">Credit card number</label>
+                        <input class="w-100 form-control" type="text" id="cc-number" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="cc-expiration">Expiration</label>
+                        <input class="w-100 form-control" type="text" id="cc-expiration" placeholder="" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="cc-cvv" >CVV</label>
+                        <input class="w-100 form-control" type="text" id="cc-cvv" placeholder="" required>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+
+
+            <div class="row m-0 px-3 pb-3">
+                <button class="btn btn-primary" type="submit">Continue to checkout</button>
+            </div>
+
+
+            
+        </div>
+
+
+
+
+
+        <div class="col-md-6 col-lg-4 bg-info">
+            <div class="row px-3 pb-3">
+
+
+                <!-- cart -->
+                <h4 class="row py-3">
+                    <div class="col-6">
+                        <span class="text-primary">Your cart</span>
+                    </div>
+                    <div class="col-6 text-end">
+                        <span class="bg-warning rounded-pill badge text-black">3</span>
+                    </div>
+                </h4>
+
+
+                <div class="row py-3 m-0">
+                    <!-- cart items -->
+                    <ul class="list-group p-0">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>
+                                <h6>Bathroom Detergent</h6>
+                                <small class="text-muted">3-bundle pack</small>
+                            </div>
+                            <span class="text-muted">$30</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>
+                                <h6>Black Coffee</h6>
+                                <small class="text-muted">20 sachets</small>
+                            </div>
+                            <span class="text-muted">$20</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>
+                                <h6>Kangaroo Facial Wash</h6>
+                                <small class="text-muted">Clearance Sale 60% off</small>
+                            </div>
+                            <span class="text-muted">$10</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between text-success bg-light">
+                            <div>
+                                <h6>Promo code</h6>
+                                <small >XMAS2021</small>
+                            </div>
+                            <span>−$10</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (USD)</span>
+                            <strong>$50</strong>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="row p-2 bg-white input-group rounded m-0">
+                    <!-- redeem -->
+                    <input class="col-6 form-control" type="text" placeholder="Promo code">
+                    <button class="btn btn-secondary col-3" type="submit">Redeem</button>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    
+
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP JAVASCRIPT
+    -->
+    <script src="../Bootstrap/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

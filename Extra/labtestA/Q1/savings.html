@@ -1,0 +1,119 @@
+<!--
+    
+Name:   
+Email:  
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!--
+          This program calculate how long it takes for you to reach your goal
+          based on a given interest rate (per year)
+     -->
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+     <!-- DO NOT REMOVE
+          REFERENCE TO LOCAL BOOTSTRAP CSS
+     -->
+     <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+ 
+     <title>Q1 - Savings</title>
+</head>
+<body>
+     
+     
+     <!--
+          YOUR CODE GOES HERE
+     -->
+
+     <div class="container mx"  width="70rem" style=" text-align: center;">
+          <div class="row">
+               <h2 style="padding-top: 40px; padding-bottom: 30px; margin: 0;">Savings</h2>
+          </div>
+          <div class="row">
+               <h4 style="color: blue; margin: 0; padding-bottom: 40px;">
+                    How long does it take for me to reach My Goal?
+               </h4>
+          </div>
+          <div class="row">
+
+               <table style="margin-top: 8px;margin-bottom: 8px;">
+                    <tr style="border: solid 1px; border-radius: 100px; border-color: lightgray;">
+                         <td class="bg-body-secondary col-1" style="font-size: xx-small; border: solid 1px; border-color: lightgray;">
+                              Initial Amount ($)
+                         </td>
+                         <td>
+                              <input id="amt" type="number" style="width: 100%; border: 0;">
+                         </td>
+                    </tr>
+               </table>
+               <table style="margin-top: 8px;margin-bottom: 8px;">
+                    <tr style="border: solid 1px; border-radius: 100px; border-color: lightgray;">
+                         <td class="bg-body-secondary col-1" style="font-size: xx-small; border: solid 1px; border-color: lightgray;">
+                              Yearly Interest (%)
+                         </td>
+                         <td>
+                              <input id="interest" type="number" style="width: 100%; border: 0;">
+                         </td>
+                    </tr>
+               </table>
+               <table style="margin-top: 8px;margin-bottom: 8px;">
+                    <tr style="border: solid 1px; border-radius: 100px; border-color: lightgray;">
+                         <td class="bg-body-secondary col-1" style="font-size: xx-small; border: solid 1px; border-color: lightgray;">
+                              My Goal ($)
+                         </td>
+                         <td>
+                              <input id="goal" type="number" style="width: 100%; border: 0;">
+                         </td>
+                    </tr>
+               </table>
+          </div>
+          <div class="row" style="align-items: start; margin-top: 40px;">
+               <button class="btn btn-danger col-1" onclick="calculate()">Calculate</button>
+          </div>
+
+          <div class="row" style="display: none;" id="result"> <!--style="display: none;"-->
+               <h5 class="text-success" style="text-align: start;">
+                    Result
+               </h5>
+               <table class="col-10" style="border: solid 1px; border-color: lightgray;">
+                    <tr style="border: solid 1px; border-color: lightgray; text-align: start;" class="col-6">
+                         <td style="border: solid 1px; border-color: lightgray;" class="fw-bold">
+                              You will achieve your goal in (years):
+                         </td>
+                         <td id="years"></td>
+                    </tr>
+                    <tr style="border: solid 1px; border-color: lightgray; text-align: start;" class="col-6">
+                         <td style="border: solid 1px; border-color: lightgray;" class="fw-bold">
+                              You will get ($):
+                         </td>
+                         <td id="total"></td>
+                    </tr>
+               </table>
+          </div>
+
+     </div>
+
+
+
+
+
+
+
+     <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP JAVASCRIPT
+     -->
+     <script src="../Bootstrap/bootstrap.bundle.min.js"></script>
+
+     <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL EXTERNAL JAVASCRIPT
+     -->
+     <script src="savings.js"></script>
+     
+</body>
+</html>
+
+
