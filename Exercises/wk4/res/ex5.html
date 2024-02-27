@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Palindrome</title>
+</head>
+<body>
+
+	<script>
+		var str = prompt("If you provide a string, I will tell you if it is a Palindrome!"); 
+		var ans = true
+       // TODO: add your code here
+	   	for (i=0;i<str.length;i++) {
+			if (str[i] != str[str.length-1-i]) {
+				ans = false
+			} 
+	   	}
+		console.log(ans)
+
+	</script>
+</body>
+</html>

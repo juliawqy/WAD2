@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Syntax & Operations</title>
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  
+</head>
+
+<body>
+    <div class="m-2 lead bg-info text-center" id="demo"></div>
+    <button class="btn btn-primary d-block m-2" onclick="number()">Number</button>
+    <button class="btn btn-primary d-block m-2" onclick="findSubStr()">Find a Substring</button>
+    <button class="btn btn-primary d-block m-2" onclick="addSortSchools()">Add and Sort Schools</button>
+    <button class="btn btn-primary d-block m-2" onclick="updateCheapestFruit()">Update the cheapest fruit</button>
+
+    <button class="btn btn-primary d-block m-2" onclick="generatePassword()">Advanced: Generate Random Password</button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+    /*
+    Reference: https://www.w3schools.com/js/
+    1. Comments: /* vs //
+    2. Debug with console.log
+    3. Keywords: var, let, if...else, for, for...in, for...of, 
+                    continue, break, function, return, try...catch
+
+    4. Naming convention: 
+        Recommended: Lower Camel Case ( e.g. firstName )
+        Not allowed: Kebab case ( e.g. first-name )
+
+    5. Data types: Number, Boolean, Null, Undefined, String, Array, Object
+        -- use typeof operator to check data type
+        -- var x = 10.2                     // number
+        -- var x = true                     // boolean
+        -- var x = null                     // null
+        -- var x                            // undefined
+        -- var x = "Yournal Drunk"          // string
+        -- var x = ["Yournal", 60, true]    // array -> a kind of object
+        -- var x = { name: "Yournal", age: 60, isMarried: true }    // object
+        
+    6. var vs let
+        - var & let   : Global scope if defined outside function (and block for let)
+        - var & let   : Function scope if defined inside function
+        - let         : Block scope if defined inside block
+        - var         : No Block scope
+
+    7. for  : loop as long as given condition evaluates to true 
+    8. for...in : loop through properties of an object 
+    9. for...of : loop through values of an iterable variable 
+                        (e.g. Array, String, NodeList etc.) 
+
+    10. Number Operations: Number(), parseInt(), parseFloat(), isNaN()
+
+    11. String Operations : length, indexOf(), toUpperCase(), trim(), slice(), 
+                            substr(), replace(), split(), many more...
+
+    12. Array Operations : legnth, push(), pop(), splice(), join(), 
+                            slice(), sort(), reverse(), many more...
+
+    13. Object: Read/Write operations
+
+    14. Exception Handling with try ... catch ... finally
+    
+    15. Callback functions : filter, find, forEach, reduce ...
+    
+    */
+
+    var output = document.getElementById("demo"); 
+
+    // Task 1: State the data types of following variables
+    var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+"; //string
+    var age = 19 //number
+    var num1 = 10.02; //number
+    var num2 = 10; //number 
+    
+    var found = 1 < 0; //boolean
+    var numbers = [5, 17, 30, 111, 21, 1, 0]; //array although treated like object
+    var schools = ["LKCSB", "SOA", "SOL"]; //array of strings although treated like object
+    var arr = [ 1, "str", true, [1,2,3], {name:"Jack"} ] //rojak array, incl nested arr
+
+    var fruit = {
+        name: 'Apple',
+        price: 1.5,
+
+        updatePrice: function(newPrice) {
+            this.price = newPrice
+            //return newPrice
+        }
+
+    } //object
+
+    fruit["updatePrice"](3) //use this syntax as this can be a variable
+    console.log(fruit.updatePrice(3))
+   
+    var fruits = [ 
+        {name: "Apple", price: 1.5},
+        {name: "Orange", price: 2.5},
+        {name: "Mango", price: 4.5},
+        {name: "Durian", price: 24},
+        {name: "Banana", price: 3.8},
+        {name: "Peach", price: 2.9}
+    ] //array of objects
+
+     /* Task 1.1: copy an object
+        - copy "fruit" object defined above to another object called "orange". And redefine its property "name" as 'Orange'
+        - when you do console.log(orange.name), you whould see 'Orange'
+        - And observe what you see when you do console.log(fruit.name)
+        - change your code so that console.log(fruit.name) still print 'Apple'
+    */
+
+    var orange = fruit
+    orange.name = "Orange"
+
+    //var prop = prompt("Give a property that you want to access") //like python input
+    var orange = fruit //shallow copy, means it changes the fruit obj directly instead of making new obj
+    console.log(orange.name) //or console.log(orange["name"])
+    //console.log(orange[prop]) //to treat property like a variable
+
+    // Task 2: use of isNaN and typeof
+    var x = 100 / "y" 
+    // try the use of isNaN(x)
+    // try console.log(typeof fruits) and check the result
+
+    if (isNaN(x)) {
+        console.log("x is not a number") //x = NaN
+    }
+    console.log(typeof x) //datatype of NaN is number
+    // Task 3: Demonstrate the difference between var, let, and const
+    const GST = 0.8
+    //GST = 0.9 cannot reassign value to const var
+
+    var i = 10 // when u use var or let to declare a variable outside of functions, 
+               //it will have GLobal scope
+    let j = 10
+    //let j = 5 cannot reassign value when using let
+    console.log(i)
+    console.log(j)
+    foo()
+    function foo() {
+        var i = 5 //redefining variable locally
+        console.log(i)
+    }
+
+    for (let fruit of fruits) {
+        console.log(fruit.name)
+    }
+    console.log(fruit.name) //wont store in new variable since let cannot reassign, return prev fruit orange
+
+    for (var fruit of fruits) {
+        console.log(fruit.name)
+    }
+    console.log(fruit.name) //var can reassign, so changed fruit to peach now
+
+    for (fruit of fruits) { 
+        console.log(fruit.name)
+    }
+    console.log(fruit.name) //by default is var (global scope)
+
+    if (true) {
+        let j = 10 //this j only works inside this if block
+    }
+
+    var isNumber = function(i=10) {
+        return !isNaN(i) //false
+    }
+
+    var result = check(isNumber, 10) //isNumber(10)
+    console.log(result)
+
+    function check(f, x) {
+        return f(x)
+    }
+
+    // Number 
+    function number() {
+        /*
+            Task 4:
+            Implement a function that asks the user to enter a number
+            Check if the user input is a number
+            If the user input is not a number, alert the message "Your input is not a number"
+            Otherwise, display the user input
+
+            Hint: explore Number(), parseInt(), parseFloat()
+        */
+
+        let num = prompt("Please enter a number");
+
+        if (isNaN(num)) {
+            alert("Your input is not a number")
+        }
+        else {
+            output.innerText = num
+        }
+     
+    }
+
+    number()
+
+    // String operations
+    function findSubStr() {
+        /*
+            Task 5:
+            Write a function that asks the user to enter a string, say str, and two characters, say st and en.
+            The function then searches for a substring in txt such that the substring begins with the character st and ends with the character en.
+            If the substring is found, display the substring.
+            If there is no such substring, display the message "No such substring".
+
+            Hint: explore includes(), indexOf(), slice()
+        */
+
+        // Fibonacci, st= 'F', en= 'b' => Fib
+        let str = prompt("Please enter a string");
+        let st = prompt("Please enter a starting character");
+        let en = prompt("Please enter a ending character");
+
+       
+      
+    }
+
+    // Array operations
+    function addSortSchools() {
+        /* 
+            Task 6: 
+            Ask the user to enter a new school name, e.g. SOE
+            Add the new school name provided by the user into the given array called schools
+            Add another school called "SCIS" by replacing an existing school at index 1
+            Sort the resulting schools array alphabetically
+            Display each school, separated by a colon : (e.g. LKCSB:SCIS:SOE:SOL)
+
+            Hint: explore push(), splice(), sort()
+        */
+
+        // given array of schools
+        schools = ["LKCSB", "SOA", "SOL"];
+
+        let newSchool = prompt("Please enter a new School");
+
+
+    }
+
+    var cheapest = 9999
+    // Object read/write, for...of, for..in, callback
+    function updateCheapestFruit() {
+        /*
+            Task 7:
+            Ask the user to enter a new price for the cheapest fruit
+            Find the cheapest fruit in the given array called fruits
+            Update the price of the cheapest fruit in the given fruits array with the new price
+            Sort the fruits according to their prices
+            Display the fruits in a list <ul>
+
+            Hint: find(), sort()
+
+        */
+        var fruits = [ 
+            {name: "Apple", price: 1.5},
+            {name: "Orange", price: 2.5},
+            {name: "Mango", price: 4.5},
+            {name: "Durian", price: 24},
+            {name: "Banana", price: 3.8},
+            {name: "Peach", price: 0.9}
+        ] 
+      
+        var newPrice = prompt("Please enter a new price")
+
+        
+        for(i=0; i<fruits.length; i++) {
+            let fruit = fruits[i]
+            console.log(fruit.name)
+
+            if (fruit.price < cheapest) {
+                cheapest = fruit.price
+            }
+        }
+        console.log(cheapest) //price
+        //i am looking for the cheapest fruit    
+        var cheapestFruit = fruits.find(myFunc)
+        cheapestFruit.price = newPrice
+        console.log(cheapestFruit)
+        
+    }
+
+    function myFunc(value, index, arr) {
+        //1st iteration
+        console.log(value.name) //{name: "Apple", price: 1.5}
+        return value.price == cheapest
+    }
+
+   
+    // Advanced: string operation, number operation, and regex
+    function generatePassword() {
+        /*
+           Task 8: 
+            Generate password that meets the following criteria
+                1. password length is equal to the length given by the user
+                2. password must contain at least ONE special symbol from !@#$%^&*()_+
+                3. password must contain at least ONE number
+                4. password must contain at least ONE Uppercase letter
+                5. password must contain at least ONE Lowercase letter
+
+            Hint: explore Math.floor, Math.random, search
+        */
+        let len = prompt("Please enter the password length (larger than 4)");
+
+    }
+</script>
+
+</body>
+</html>

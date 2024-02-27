@@ -1,0 +1,116 @@
+<!--
+    
+Name:   
+Email:  
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP CSS
+    -->
+    <link rel="stylesheet" href="Bootstrap/bootstrap.min.css">
+
+    <style>
+        .user {
+            width: 50px;
+            height: 50px;
+            padding: 0px;
+        }
+
+        .idk {
+            padding: 20px;
+        } 
+
+        .john {
+            text-align: end;
+        }
+
+    </style>
+
+    <title>Courses</title>
+</head>
+<body>
+    <h4>Create a web page that looks like the one given below</h4>
+    <img src="./page.png" class="w-75" alt="">
+    <hr>
+    
+    <ol class="lead">
+        <li>If the screen width size is larger or equal to 992px (>= .lg), "Name" occupies 50% of its parent container ("Particular")</li>
+        <li>If the screen width size is between 991px and 768px ( .lg &lt; size &lt;= .md), "Name" occupies 100% of its parent container ("Particular"). "Email" and "Year" is displayed in the same row below the "Name".</li>
+
+        <li>If the screen width size is smaller than 768px (&lt; .md), every field in "Particular" is displayed in a separate row.</li>
+    
+    <hr>
+    
+        <li>If the screen width size is larger or equal to 992px (>= .lg), "Courses Taken" occupies 25% of the screen width (col-3) </li>
+        <li>If the screen width size is between 991px and 576px ( .lg &lt; size &lt;= .sm), "Courses Taken" occupies 50% of the screen width (col-6)</li>
+        <li>If the screen width size is smaller than 576px (&lt; .sm),"Courses Taken" occupies the full screen width. And the "Courses Taken" is displayed above the "Particulars"</li>
+        <li>If the screen width size is smaller than 768px (&lt; .md),"Courses Taken" is displayed on the left. "Particulars" is displayed on the right </li>
+    </ol>
+    <hr>
+
+
+    <!--
+        Explore:
+            Courses Taken: 
+            https://getbootstrap.com/docs/5.3/components/badge/ 
+            https://getbootstrap.com/docs/5.3/components/list-group/#with-badges
+
+            Name, Email, Year: https://getbootstrap.com/docs/5.3/forms/layout/
+            Select: https://getbootstrap.com/docs/5.3/forms/select/
+    -->
+
+    <!-- ADD/MODIFY CODE BELOW -->
+
+    <div class="container-fluid idk">
+        <div class="row justify-content-end">                
+            <img src="user.png" class="user">
+        </div>
+
+        <div class="row justify-content-end john">
+            John 
+        </div>
+    </div>
+   
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Particulars -->
+            <div class="col p-3 bg-secondary text-light">
+                <h4 class="mb-3">Particulars</h4>
+                <div class="col">
+                    <input class="w-100" type="text" placeholder="Name">
+                </div>
+                <div class="col-lg-2 ">
+                    <input type="text" placeholder="Email">
+                </div>
+                <div class="col-lg-2 ">
+                    <input type="text" placeholder="Year">
+                </div>
+            </div>
+
+            <!-- courses taken -->
+            <div class="col p-3 bg-primary">
+                <h4 class="text-light">Courses Taken</h4>
+
+             
+            </div>
+
+
+        </div>
+    
+
+    </div><!-- end-container-->
+
+    <!-- DO NOT REMOVE. REFERENCE TO LOCAL BOOTSTRAP JavaScript -->
+    <script src="Bootstrap/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
