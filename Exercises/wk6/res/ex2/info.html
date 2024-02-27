@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    </head>
+    <body>
+        <div class="jumbotron p-3" style="background-color: lightgrey;">
+            <h2>Choose an option:</h2>
+            <label for="limit">Limit:</label>
+            <input id="limit" type="number" min=1 max=5 value=1 onchange="getData()">
+            <select onchange="getData()">
+                <option value="customers">Customers</option>
+                <option value="products">Products</option>
+                <option value="suppliers">Suppliers</option>
+            </select>
+        </div>
+        <div id="result">
+
+        </div>
+        <script>
+
+            //wait actly no need cuz using onchange
+            // var tableHead = document.getElementsByTagName("select")[0]
+            // tableHead.addEventListener("change", console.log(tableHead.value))
+            
+            function getData() {
+                
+                let optionValue = document.getElementsByTagName("select")[0].value
+                let limitValue = document.getElementById("limit").value
+                var returnSpace = document.getElementById("result")
+                var url = "getData.php"
+
+                // Add Code Here
+                axios.post(
+                    url, {
+                        // params: { //only get need param, post j go to the next line
+                            type : optionValue, //OHHH LIKE BINDING THE PARA TO PASS TO PHP
+                            limit : limitValue
+                        // }
+                    }
+                )
+                .then (
+                    response => {
+                        //table header first
+                        var headerText = document.createTextNode(optionValue + ":")
+                        var header = document.createElement("h2")
+                        var blankLine = document.createElement("br")
+
+                        header.appendChild(blankLine)
+                        header.appendChild(headerText)
+
+                        while (returnSpace.childElementCount != 0) { //lmfao T.T
+                            returnSpace.removeChild(returnSpace.firstChild)
+                        }
+
+                        returnSpace.appendChild(header)
+
+                        //next the table lines
+                        //i forgot how to print tables fml wtf use bootstrap ah
+                        var tableDiv = document.createElement("div")
+                        var tableHeader = document.createElement("div") 
+
+                        tableDiv.setAttribute("class", "container-fluid")
+                        tableDiv.setAttribute("style", "margin: 20px;")
+                        tableHeader.setAttribute("class", "row")
+                        tableHeader.setAttribute("style", "border-top: solid 1.5px; border-top-color: lightgray;")
+                        
+                        var nameDiv = document.createElement("div")
+                        var name = document.createTextNode("name")
+
+                        nameDiv.setAttribute("class", "col m-2 fw-bold")
+                        nameDiv.appendChild(name)
+                        
+                        var headerArr = []
+
+                        if (optionValue == "products") {
+                            var priceDiv = document.createElement("div")
+                            var price = document.createTextNode("price")
+
+                            priceDiv.setAttribute("class", "col m-2 fw-bold")
+                            priceDiv.appendChild(price)
+
+                            headerArr = [nameDiv, priceDiv]
+                        }
+                        else {
+                            var ageDiv = document.createElement("div")
+                            var age = document.createTextNode("age")
+                            var cityDiv = document.createElement("div")
+                            var city = document.createTextNode("city")
+                            
+                            ageDiv.setAttribute("class", "col m-2 fw-bold")
+                            ageDiv.appendChild(age)
+
+                            cityDiv.setAttribute("class", "col m-2 fw-bold")
+                            cityDiv.appendChild(city)
+                            
+                            headerArr = [nameDiv, ageDiv, cityDiv]
+                        }                        
+
+                        for (cols of headerArr) {
+                            tableHeader.appendChild(cols)
+                        }
+
+                        tableDiv.appendChild(tableHeader)
+                        returnSpace.appendChild(tableDiv)
+
+                        //process data lines
+                        var responseArr = response.data 
+                        //arr with nested obj mapped to name & price, len(arr) correspond to limit
+                        // var rowName = document.createTextNode("")
+                        // var rowPrice = document.createTextNode("")
+
+                        console.log(response)
+                        console.log(responseArr)
+                        console.log(responseArr.records)
+                        for (responses of responseArr["records"]) {
+                            var rowNameDiv = document.createElement("div")                            
+                            var rowName = document.createTextNode(responses["name"])  
+
+                            rowNameDiv.setAttribute("class", "col m-2")   
+                            rowNameDiv.appendChild(rowName)  
+                            
+                            colArr = []
+
+                            if (optionValue == "products") {
+                                var rowPriceDiv = document.createElement("div")
+                                var rowPrice = document.createTextNode(responses["price"])
+                                
+                                rowPriceDiv.setAttribute("class", "col m-2")
+                                rowPriceDiv.appendChild(rowPrice)
+
+                                colArr = [rowNameDiv, rowPriceDiv]
+                            }
+                            else {
+                                var rowAgeDiv = document.createElement("div")
+                                var rowAge = document.createTextNode(responses["age"])
+                                var rowCityDiv = document.createElement("div")
+                                var rowCity = document.createTextNode(responses["city"])
+                                
+                                rowAgeDiv.setAttribute("class", "col m-2")
+                                rowAgeDiv.appendChild(rowAge)
+                                rowCityDiv.setAttribute("class", "col m-2")
+                                rowCityDiv.appendChild(rowCity)
+
+                                colArr = [rowNameDiv, rowAgeDiv, rowCityDiv]
+                            }            
+
+                            var newRow = document.createElement("div")
+                            newRow.setAttribute("class", "row")
+                            newRow.setAttribute("style", "border-top: solid 1.5px; border-top-color: lightgray;")
+
+                            for (cols of colArr) {
+                                newRow.appendChild(cols)
+                            }
+
+                            tableDiv.appendChild(newRow)
+
+                        }
+
+                        returnSpace.appendChild(tableDiv)                     
+                       
+
+                    }
+                )
+
+                .catch (
+                    error => {
+                        console.log(error.message);
+                    }
+                )
+
+            }
+
+            // You may also add helper function(s) as you deem fit
+            
+        </script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+     
+    </body>
+</html>

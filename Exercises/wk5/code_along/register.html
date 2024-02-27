@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <title>Registration</title>
+
+    <style>
+        .row {
+            background-color: yellow;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .timeslot {
+            background-color: pink;
+        }
+
+        .choosecolor {
+            background-color: lightcyan;
+            border: 2px solid red;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script>
+        /*
+            1. Document object model (DOM) : a tree-like data structure that represents HTML document 
+                - HTML elements, attributes, texts are represented as nodes 
+
+            2. Event handling: JS can listen to events and react to them
+            
+            3. DOM manipulation: manipulating DOM, JS can create dynamic web pages 
+                - changing HTML elements, attributes, CSS styles, adding, removing elements and attributes, reacting to events, etc.
+
+            4. HTML Elements have properties and methods
+                - property is a value that you can get or set -- elem.value, elem.type, elem.id, elem.name, etc.
+                - method is an action that you can perform for accessing elements, attributes, creating, or removing elements
+
+            5. Access elements: getElementById, getElementsByClassName, getElementsbyTagName
+
+            6. Add/Remove elements: createElement, createTextNode, appendChild, remove
+
+            7. Access & modify attributes: 
+                via properties:
+                    .value, .id, .href, .src, .style.property
+
+                via methods:
+                    getAttribute, getAttributeNames,            
+                    getAttributeNode, setAttribute, 
+                    getAttribute returns value of an attribute (not an object). 
+            
+            8. Modify CSS Styling
+                element.style.property
+                e.g. element.style.backgroundColor = "red"
+                
+                Note: use lowerCamelCase to access CSS properties
+                    e.g.,   use textAlign instead of text-align
+                            use 
+
+
+            8. Event handling
+                    Separation of concerns: addEventListener
+                    Passing parameters to event handlers
+                    
+        */
+    </script>
+</head>
+
+<!--kebab case (got -)-->
+<body>
+    <h2>You are to add Javascript code in register.js file ONLY. You are not allowed add/delete/modify code in register.html</h2>
+    <ol class="lead">
+       <li>Add code that capitalizes first letter of the first name after the user has entered the first name. Likewise for the last name</li>
+       <li>Add code that shows an alert box saying that 'no space for Username', when the user clicks on Username input field. Use .getElementsByClassName</li>
+       <li>Add code that shows an alert box saying that '@ must be present', when the user clicks on Email input field. Use .getElementsByTagName. Use array index to get the email element</li>
+       <li>Add code that changes the background color of 'Short Description' textarea to gray color when the textarea is selected. Use 'focus' event listener</li>
+       <li>Add code that bolds the font of dropdown menu after the user has selected a timeslot. Use .getElementsByClassName("timeslot") and its 'children' to get the timeslot dropdown element</li>
+       <li>Add code that displays the text 'Red is checked' in a paragraph, when the user clicks on the 'Red' checkbox. Likewise for 'Green' and 'Yellow checkboxes. The text must be displayed inside the 'choosecolor' div. Additionally you can also change the background color of the web page according to the selected color.</li>
+       <li>Add/Modify your code in Task 6 above so that the checkbox is removed once the user has checked. </li>
+       <li>Complete validateForm function so that it checks the following:
+            <ul>
+                <li>username must have at least 5 characters</li>
+                <li>email must contain '@'</li>
+                <li>a timeslot must be selected</li>
+            </ul>
+            If any of the above checks fail, the function returns false; otherwise return.
+       </li>
+    </ol>
+    <hr>
+
+    <div class="jumbotron bg-primary text-white text-center">
+        <h1 class="display-3"> Registration Page</h1>
+        <p> Enter the details to register </p>
+    </div>
+
+    <form onsubmit="return validateForm(event)" id="frm" action="register.php">
+
+        <div class="container">
+
+            <h3 class="text-center" style="margin-bottom:10px;"> About You </h3>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label class="fw-bold" style="color: purple"> First Name </label> <span
+                        class="badge bg-success"> must </span>
+                <!-- notice the foo(event) -->
+                    <input id="fname" name="fname" onchange="foo(event)" type="text" class="form-control" placeholder="First name">
+                </div>
+
+                <div class="col form-group">
+                    <label class="fw-bold" style="color: purple"> Last Name </label> <span
+                        class="badge bg-success"> must </span>
+                    <input id="lname" name="lname" type="text" class="form-control" placeholder="Last name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label class="fw-bold" style="color: green"> User Name </label> <span
+                        class="badge bg-success"> must </span>
+                    <input type="text" name="uname" class="form-control" placeholder="Username ">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label class="fw-bold" style="color: green"> Email </label> <span
+                        class="badge bg-success"> must </span>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label class=" fw-bold font-weight-italics" style="color: green"> Short
+                        Description </label>
+                    <textarea class="form-control"
+                        placeholder="write a short description about yourself ..."></textarea>
+                </div>
+            </div>
+
+
+            <h4 class="text-center"> Choose Timeslot </h4>
+
+            <div class="row timeslot">
+                <div class="col form-group">
+                    <label>Timeslot</label>
+                    <select name="timeslot" class="form-control" multiple>
+                        <option selected disabled>Please select a slot</option>
+                        <option>0800 - 1000</option>
+                        <option>1000 - 1200</option>
+                        <option>1200 - 1400</option>
+                        <option>1400 - 1600</option>
+                        <option>1600 - 1800</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <h4 class="text-center"> Choose Colors </h4>
+
+            <div class="row choosecolor">
+                <div class="col">
+                    <div>
+                        <input type="checkbox" id="color1" name="color" value="Red">
+                        <label class="text-danger fw-bold" for="color1"> Red </label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="color2" name="color" value="Green">
+                        <label class="text-success fw-bold" for="color2"> Green</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="color3" name="color" value="Yellow">
+                        <label class="text-warning fw-bold" for="color3"> Yellow</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+        </div>
+
+    </form>
+
+    <script src="register.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

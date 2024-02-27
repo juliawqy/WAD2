@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+       <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 40%;  /* The height is 40% of the browser height */
+            width: 100%;  /* The width is the width of the web page */
+        }
+            /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+  </head>
+  <body>
+    <h3>My Google Map</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+ 
+    <div class="jumbotron">          
+        <p class="lead text-center">Get Geo Location</p>
+        <form>
+            <div class="form-group">
+                <label for="addr">Enter An Address</label>
+                <input type="text" class="form-control" name="addr" id="addr" placeholder="E.g. Singapore Management University" >
+                <br><button type="button" onclick="getLoc('addr')" class="btn btn-primary">Get Full Address!</button>
+                <button type="button" onclick="getLoc('postcode')" class="btn btn-primary">Get Postal Code!</button>
+            </div>
+            <p id="display" class="lead text-center"></p>   
+        </form>
+    </div>
+
+    <script>
+        // default lat/lng value at SMU
+        var lat = "1.2973784"
+        var lng = "103.8495219"
+        var title = "Hello SMU"
+         /* todo: 
+            Load the map using Google Maps API
+            Initialize the map to point to SMU at the start
+         */
+        let map
+        function initMap() {
+            // default: The location of SIS, SMU
+            lat = parseFloat(lat)
+            lng = parseFloat(lng)
+            // var uluru = {lat: -25.344, lng: 131.036};
+            var loc = {lat: lat, lng: lng}
+
+            // The map, centered at SIS, SMU
+            map = new google.maps.Map(
+                // play with the zoom value to zoom in or out
+                document.getElementById('map'), 
+                {center: loc, zoom: 14})
+            // The marker, positioned at SIS, SMU
+            const marker = new google.maps.Marker({position: loc, map: map, title: title})
+        }
+        // window is a global object that has the properties of the current DOM object, eg. window.document
+        console.log(window.innerWidth)
+        // we can add additioanl property like initMap so that we can access it whenever necessary
+        
+        window.initMap = initMap
+    </script>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * Async script executes immediately and must be after any DOM elements used in callback.
+    * The key parameter will contain your own API key 
+    * The callback parameter executes the initMap() function
+    -->
+     <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3EOF-YSfUFeZd6XGucXH6KLPTMVD-QDg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+
+    <script>
+
+         /* todo: 
+            User is supposed to enter an address. 
+            Upon clicking the "Get Full Address" or "Get Postal Code" button, 
+            read the user input and make an Async request to get the full address or the postal code; and display the result
+            Re-center the map according to the new address given by the user.
+        
+            You may implement additional helper functions as needed
+        */
+   
+        // Async call
+        function getLoc(action) {
+            var addr = document.getElementById("addr").value;
+            console.log(addr);
+            var url = "https://maps.googleapis.com/maps/api/geocode/json";
+            var key = "AIzaSyC3EOF-YSfUFeZd6XGucXH6KLPTMVD-QDg"
+            
+            axios.get(url, {
+                        params: {
+                            address : addr,
+                            key : key
+                        }
+                    })
+                    .then(response =>  {
+                        let data = response.data
+                        console.log(data);
+
+                        let info = '';
+                        if (action == 'postcode') {
+                            // display postal code, given an address
+                            info = getPostCode(data);
+                        } else {
+                            // display full address, given post code or partial addr
+                            info = getFullAddress(data);
+                        }
+                        console.log(info);
+                        
+                        document.getElementById("display").innerText = info;
+                        // refresh the hidden input values with new lat lng coordinates
+                        let coordinate = getLatLng(data);
+                        lat = coordinate["lat"];
+                        lng = coordinate["lng"];
+                        title = "Hello " + addr
+                        // now refresh the map
+                        initMap();
+                    })
+                    .catch(error => {
+                        // not a good idea to directly show err.message 
+                        // as it may contain sensitive info
+                        // document.getElementById("display").innerText = error.message;
+                        // show a predefined error message string
+                        document.getElementById("display").innerText = "Sorry, invalid address. Please try again!";
+                    }); 
+        }
+
+        function getFullAddress (data) {
+            var addr = data["results"][0]["formatted_address"];
+            var loc = getLatLng(data);
+            return addr + ", lat: " + loc["lat"] + ", lng: " + loc["lng"];
+        }
+
+        function getLatLng(data) {
+            var location= data["results"][0]["geometry"]["location"];
+            return location; 
+        }
+
+        function getPostCode(data) {
+            var addrcomponents = data["results"][0]["address_components"];
+            var postcode = addrcomponents.filter(postcodeHelper);
+            // country is an array but there should be only one element
+            return postcode[0]["long_name"];
+        }
+
+        function postcodeHelper(addr) {  
+            return addr["types"][0] == "postal_code" ;
+        }
+
+
+        function getKeys(data){
+            // data["results"][0] is an object
+            // this gets the keys/properties of results[0] object
+            var keys = Object.keys(data["results"][0]);
+            for (key of keys) {
+                // this prints --
+                /*  address_components
+                    formatted_address
+                    geometry
+                    place_id
+                    plus_code
+                    types */
+                document.getElementById("display").innerText += key + "; ";
+            }
+        }
+
+        function getCountry(data) {
+            // this is an array
+            var addrcomponents = data["results"][0]["address_components"];
+            // The filter() method creates a new array with array elements that passes a test.
+            var country = addrcomponents.filter(countryHelper);
+            // country is an array but there should be only one element
+            return country[0]["long_name"];
+        }
+
+        function countryHelper(addr, index) {  
+            return addr["types"][0] == "country" ;
+        }
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+</body>
+</html>

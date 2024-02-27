@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    
+    <h2>Form Validation</h2>
+
+    <form name="form" action="." onsubmit="return validateForm('form')" autocomplete="on" >
+            ID: <input type="text" name="id" ><br>
+            Age: <input type="number" name="age" ><br>
+            Email: <input type="text" name="email" ><br>
+            Password: <input type="password" name="password" ><br>
+            <input type="submit" value="Submit"><br>
+        </form>
+
+        <script>
+        
+            function validateForm(fname) {
+                var form = document.forms[fname] // form object
+
+                errorArr = []
+
+                console.log(form)
+                if (form.id.value.length > 10) {
+                    errorArr += "ID should have a maximum of 10 characters \n"
+                }
+                if (form.age.value < 10 || form.age.value > 40) {
+                    errorArr += "Age should be from 10-40 \n"
+                }
+                if (!form.email.value.includes("@")) {
+                    errorArr += "Invalid email \n"
+                }
+                if (form.password.value == '') {
+                    errorArr += "Password field should not be empty \n"
+                }
+
+                alert(errorArr)
+            }
+     
+         </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Shopping List</h1>
+
+    <select id="select_item">
+        <option value="NoteBook">Notebook</option>
+        <option value="Jello">Jello</option>
+        <option value="Spinach">Spinach</option>
+        <option value="Rice">Rice</option>
+        <option value="Birthday Cake">Birthday Cake</option>
+        <option value="Candles">Candles</option>
+    </select>
+
+    <p>Shopping Cart:</p>
+    <ul id="shopList"></ul>
+
+    <script>
+        
+        // add code here
+        var item = document.getElementById("select_item")
+        item.addEventListener("change", addItem) 
+        //use change not click
+        //click will have dupe, cuz everytime press dropdown will append current item
+        //on change will only append item aft the selected item of dropdown is selected
+        //similarly, if adding as attribute use onchange not onclick
+
+
+        function addItem() {
+            var cart = document.getElementById("shopList")
+            var node = document.createTextNode(item.value)
+            var listElem = document.createElement("li")
+            
+            listElem.appendChild(node)
+            console.log(listElem)
+            cart.appendChild(listElem)
+
+        }
+    
+    </script>
+
+    
+
+    </body>
+</html>

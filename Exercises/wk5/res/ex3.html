@@ -1,0 +1,61 @@
+<html>
+   <head>
+      <title>Event Handling</title>
+   </head>
+   <body>
+   
+      <h1>Shopping List</h1>
+      <p>Get it done today</p>
+      
+      <!-- add HTML code here -->
+
+
+      <input type="text" id="input" placeholder="enter items"> <!--use id not name-->
+      <button name="submit" onclick="add()">Enter</button> 
+
+      <ul>
+         <li>Notebook <button onclick="deleteItem(this)">Delete</button> </li>
+         <li>Jello <button onclick="deleteItem(this)">Delete</button> </li>
+         <li>Spinach <button onclick="deleteItem(this)">Delete</button> </li>
+         <li>Rice <button onclick="deleteItem(this)">Delete</button> </li>
+         <li>Birthday Cake <button onclick="deleteItem(this)">Delete</button> </li>
+         <li>Candles <button onclick="deleteItem(this)">Delete</button> </li>
+      </ul>
+      <script>
+      
+      // add code here
+      // var fname = document.forms["form"]
+      function add() {
+         var newItem = document.getElementById("input") //use id not name
+         var node = document.createTextNode(newItem.value + " ")
+         var listItem = document.createElement("li")
+         var buttonElem = document.createElement("button")
+         var buttonNode = document.createTextNode("Delete")
+         // name='delete' onclick='deleteItem()'>
+
+         buttonElem.setAttribute("onclick", "deleteItem(this)")
+         buttonElem.appendChild(buttonNode)
+         listItem.appendChild(node)
+         listItem.appendChild(buttonElem)
+
+         var uList = document.getElementsByTagName("ul")[0]
+
+         //make sure user input not empty
+         if (newItem.value.length > 0) {
+            uList.appendChild(listItem)
+         }
+      }
+
+      //use this, then in function can j replace argument w parameter
+      //node can access parentElement
+      function deleteItem(node) {
+         
+         var itemDelete = node.parentElement
+         itemDelete.remove()
+
+      }
+
+      </script>
+
+   </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+   
+        <!-- Add Axios Library -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    </head>
+    <body>
+       <!-- add code here-->
+        <div class="container">
+            <div class="row m-2">
+                <div class="col bg-light">
+                    <p>Type a name on the input field below</p>
+                    <form>
+                        Name: <input type="text" id="name">
+                    </form>
+                    <p> Suggestions: <span id="txtHint"> </span> </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            // add code here
+            var url = "http://localhost/wad2/wk6/res/ex1/getHint.php" //absolute path 
+            var url = "getHint.php" //vs relative path (localhost can use)
+
+            var input = document.getElementById("name")
+            input.addEventListener("keyup", getSuggestion)
+
+            function getSuggestion() {
+                let value = input.value
+                console.log(value)
+
+                axios.get( //promise
+                    url, {
+                        params: {
+                            query : value //"query" is key from php page (line 39), "value" is variable from above
+                    
+                        }
+                    }
+                )
+
+                .then ( //success scenario
+                    // function() {
+                    //     console.log(response.data)
+                    // }
+
+                    response => { //function shorthand
+                        console.log(response.data)
+
+                        let output = document.getElementById("txtHint")
+                        output.innerText = response.data
+                    }
+                )
+
+                .catch (
+                    error => {
+                        let output = document.getElementById("txtHint")
+                        output.innerText = "Network Error"
+                    }
+                )
+
+            }
+           
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        
+      
+    </body>
+</html>

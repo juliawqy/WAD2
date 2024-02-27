@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: goldenrod;
+        }
+
+        /* add CSS code here */
+
+        #div2 {
+            width: 200px;
+            height: 200px;
+            background-color: goldenrod;
+            border-radius: 100%;
+        }
+
+    </style>
+
+    
+</head>
+<body>
+    
+    <h2>Changing HTML Attribute Value</h2>
+
+    <div id="div1"></div>
+
+    <button onclick="changeShape()">Make a change!</button>
+
+    <script>
+        
+       // add code here
+        function changeShape() {
+            if (document.getElementById("div1")) {
+                document.getElementById("div1").id = "div2";
+            }
+            else {
+                document.getElementById("div2").id = "div1";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
