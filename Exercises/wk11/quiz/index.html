@@ -1,0 +1,53 @@
+
+<html>
+<head>
+    <script src='https://unpkg.com/axios/dist/axios.js'></script>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <!-- q1 -->
+    <div id='output'></div>
+
+    <script>
+        var output = document.getElementById('output');
+        var title = "Earn&Young" //aft the & becomes another query
+
+        axios.get('getData.php?title=' + title)
+            .then(response => {output.innerText = response.data
+            console.log(output)})
+    </script>
+
+
+    <!-- q2 -->
+    <div id='app'>  
+        <p v-for="(a,b) in obj">{{a}}{{b}}</p>
+        <!-- did not work because DID NOT GIVE VUE LINK like the bootstrap axios library thing -->
+    </div>
+     
+    <script>
+        Vue.createApp({
+            data() {
+            return {
+                obj: {
+                    boy: 'good'
+                },
+                a : 3,
+                b : 4,
+            };
+            }
+        }).mount('#app');
+    </script>
+
+
+    <!-- q3 -->
+    <div id='output'></div>
+
+    <script>
+        var obj = { name:"Mary" };
+
+        document.getElementById('output').innerHTML = `{"name":"${obj.name}"}` //= _______(obj);
+    </script>
+
+
+</body>
+</html>

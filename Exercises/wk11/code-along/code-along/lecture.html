@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        What is Vue Component? -> self-contained & reusable custom element
+        1. Vue Component Syntax : 
+            Vue.createApp( {} ).
+                component('comp-name', {
+                                    props : ['prop1', 'prop2'],
+                                    
+                                    emits : ['event1', 'event2'],
+                                    
+                                    template: `HTML code 
+                                        {{ prop1 }}
+                                    `,
+                                    
+                                    data: function() {
+                                        return { val : 'some data' }
+                                    },
+                                    
+                                    methods: {
+                                        compute: function() {
+                                            // compute something
+                                        }
+                                    },
+                                    computed: {
+                                        someValue () {
+                                            return "some value"
+                                        }
+                                    }
+                                    
+                                }
+                        )
+
+        2. Register component before mount
+
+        3. Passing data to component with props -- custom attributes
+
+        4. Passing content with Slots
+
+        5. Emitting Events & Data
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+        body {  
+            background: linear-gradient(to right, rgb(90, 216, 255), rgb(254, 63, 97)); 
+        }
+    </style>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+</head>
+<body>
+
+    <div id='app'>
+
+        <p>Total Likes: {{num_likes}} </p>
+        <p>Total Unlikes: {{num_unlikes}} </p>
+
+        <div class="d-flex">
+
+            <comp @fire="doFire" @ice="doIce" v-for="user in users" :name="user.name" :email="user.email" :pic="user.pic">
+                text content
+            </comp>
+            <!-- custom element, where props are inputs to the element just like normal attribute to standard HTML element -->
+
+            <!-- <div v-for="user in users" class="card" width="18rem">
+                <img :src="user.pic" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ user.name }}
+                    </h5>
+                    <p class="card-text">
+                        {{ user.email }}
+                    </p>
+                    <button type="button" class="btn btn-primary m-1">Like</button>
+                    <button type="button" class="btn btn-danger">Unlike</button>
+                </div>
+            </div> -->
+
+        </div>
+
+        
+       
+    </div> 
+    <script>
+
+        var url = "https://randomuser.me/api"
+
+        const app = Vue.createApp({
+
+            data() {
+                return {
+                    users: [],
+                    num_of_users: 3,
+                    num_likes: 0,
+                    num_unlikes: 0
+                }
+            },
+
+            methods: {
+
+                doFire() {
+                    this.num_unlikes++
+                },
+
+                doIce() {
+                    this.num_likes++
+                },
+
+                getUser() {
+
+                    axios.get(url)
+                    .then( response => {
+                        console.log(response.data)
+
+                        user = {}
+                        result = response.data.results[0]
+
+                        user.name = result.name.first + " " + result.name.last
+                        user.email = result.email
+                        user.pic = result.picture.medium
+                        if (result.gender == "male") {
+                            user.isMale = true
+                        }
+
+
+                        this.users.push(user)
+
+                })
+
+                }
+            },
+
+            created() {
+                
+                for(i=0; i< this.num_of_users; i++) {
+                    this.getUser()
+                }
+
+                
+
+            }
+
+
+        })
+
+        app.component("comp", {
+            //options object
+            data() {
+                return {
+                    count: 0,
+                    isLike: true
+                }
+            },
+
+            methods: {
+                doLike() {
+                    this.isLike = true
+                    this.$emit("ice")
+                },
+
+                doUnlike() {
+                    this.isLike = false
+                    this.$emit("fire") //this profuces a "fire" event as an output
+                }
+            },
+
+            emits:["fire", "ice"], //this declares output events which may be produced by 
+            props: ["name", "email", "pic"], //these are the inputs to this custom element
+
+            template: `
+            <div class="d-flex">
+
+                <div class="card" width="18rem">
+                    <img :src="pic" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ name }}
+                        </h5>
+                        <p class="card-text">
+                            {{ email }}
+                        </p>
+                        <p class="card-text">
+                            <slot></slot>
+                        </p>
+                        <button type="button" class="btn btn-primary m-1" @click='doLike()'>Like</button>
+                        <button type="button" class="btn btn-danger" @click='doUnlike()'>Unlike</button>
+                        <p class="card-text" v-if='isLike'> I Like You </p>
+                        <p class="card-text" v-else> I Hate You </p>
+                    </div>
+                </div>
+
+            </div>
+            `
+        })
+       
+        const vm = app.mount("#app")
+    
+    </script>
+
+   
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

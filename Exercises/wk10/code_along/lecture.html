@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- content -->
+
+        Provide a message: <textarea v-model="msg"></textarea> <!--msg property-->
+        <br>
+        {{ msg }}
+        <br>
+
+        Provide a fruit: <textarea v-model="newFruit" v-on:keyup.enter="addFruit"></textarea> <!--msg property-->
+        <br>
+        {{ newFruit }}
+        <br>
+
+        <label v-for="(fruit, index) in fruits">
+            {{ fruit }} <input type="checkbox" name="fruit" v-model="selectedFruits" v-bind:value="fruit">
+        </label>
+        
+        <p>{{ selectedFruits }}</p>
+
+        <select name="" id="" v-model="favouriteFruit"> 
+        <!-- v-model for dropdown is under select not option -->
+            <option :value="fruit" v-for="fruit in fruits">
+                {{ fruit }}
+            </option> 
+        </select>
+
+        <p>{{ favouriteFruit }}</p>
+
+
+
+    </div>
+
+    <script>
+
+        const app = Vue.createApp( {
+            //data, methods, mounted, computed
+            data() {
+                return {
+                    msg: "peach",
+                    fruits: ["apple", "orange", "pear"],
+                    selectedFruits: [],
+                    favouriteFruit: ""
+                }
+            },
+            methods: {
+                foo() {
+                    console.log("in foo")
+                    return "foo"
+                },
+                foo2() {
+                    //another method
+                },
+                addFruit() {
+                    this.fruits.push(this.newFruit.slice(0, -1))
+                }
+            }
+        })
+
+        const vm = app.mount("#app")
+    </script>
+
+
+
+
+
+
+</body>
+</html>

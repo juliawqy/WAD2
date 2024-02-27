@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShoppingCart</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <h2>Shopping Cart</h2>
+        <!-- TODO: Add Code Here -->
+        <ul v-for="(item, index) in items">
+            
+            <li id="{{item}}"> 
+                {{item}} &nbsp;
+                <!-- cannot name button delete cuz delete is reserved keyword -->
+                <button @click="remove(index)" > Delete! </button> 
+            </li>
+
+        </ul>
+
+        <input @keyup.enter="add" v-model="newItem" type="text"> 
+        <button @click="add"> Add! </button>
+
+    </div> 
+
+    <script>
+        // TODO: Add necessary code below
+        const vm = Vue.createApp({  
+            data() {
+                return {
+                    items: ['keyboard', 'mouse', 'iPhone', 'macbook', 'adapter'],
+                    newItem : ""
+                }
+                
+            },
+
+            // this one cannot use computed!! must use methods
+            // i think because splicing based on index, need be updated everytime
+            // actly can j splice inline html instead of here as per soln then here can use computed
+            methods: {
+                remove(index) {
+                    this.items.splice(index, 1)
+                },
+
+                add() {
+                    this.items.push(this.newItem)
+                }
+            }
+
+        }).mount('#app')
+    </script>
+</body>
+</html>

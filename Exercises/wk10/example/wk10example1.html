@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Computed</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>First Name: "{{ fName }}"</p>
+        <p>Last Name: "{{ lName }}"</p>
+        <p>Full Name: "{{ fullName }}"</p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    fName: 'Mike',
+                    lName: 'Jones',
+                    //fullName: "Mikey Jones" //derived/dependent property
+                    age: 30
+                }
+            },
+            computed: { //like a data property, only refresh if dependent variables are updated
+                fullName() {  // getter
+                        console.log("computed")
+                        // `this` points to this vm instance
+                        return this.fName + ' ' + this.lName   
+                } 
+            },
+            methods: { //if use method it will keep reexecuting if any variable get updated, not just needed
+                getFullName() {
+                    console.log("methods")
+                    return this.fName + " " + this.lName
+                }
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>

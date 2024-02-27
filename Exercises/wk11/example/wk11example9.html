@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vmodel</title>
+     <!-- using CDN -->
+     <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id = "app">
+        <search-bar v-model="search"></search-bar>
+        <p>SearchText: {{ search }}</p>
+    </div>
+
+    <script>
+        const app = Vue.createApp({ 
+            data() {
+                return {
+                    search: ''
+                }
+            }
+        })
+
+        app.component('search-bar', {
+                props: ['modelValue'],
+                emits: ['update:modelValue'],
+                template: `<div>
+                        Search: <input
+                        v-bind:value="modelValue"
+                        v-on:input="$emit('update:modelValue', $event.target.value)"
+                        >
+                    </div>`
+        })
+
+        app.mount('#app');
+    </script>
+
+    
+
+
+</body>
+</html>

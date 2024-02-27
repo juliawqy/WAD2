@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+        body {  
+            background: linear-gradient(to right, rgb(90, 216, 255), rgb(254, 63, 97)); 
+        }
+    </style>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+</head>
+<body>
+
+    <div id='app'>
+        <h2>Total Likes: {{ total }}</h2>
+
+        <!-- Modify the code below -->
+
+        <custom-img></custom-img>
+      
+    </div> 
+
+    <script>
+         
+    
+    const app = Vue.createApp({
+                    data() {
+                        return {
+                            // DO NOT EDIT - START
+                            total: 0,
+                            data:   [
+                            {   caption : 'Dracula', path: 'img/Dracula.jpg',
+                                info: "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It introduced the character of Count Dracula and established many conventions of subsequent vampire fantasy.[1] The novel tells the story of Dracula's attempt to move from Transylvania to England so that he may find new blood and spread the undead curse, and of the battle between Dracula and a small group of people led by Professor Abraham Van Helsing."
+                            },
+
+                            {
+                                caption: 'Megamind', path: 'img/Megamind.jpg',
+                                info: "  Megamind is a 2010 American computer-animated superhero comedy film directed by Tom McGrath and released by Paramount Pictures and DreamWorks Animation. It features the voices of Will Ferrell, Tina Fey, Jonah Hill, David Cross, and Brad Pitt."
+                            },
+                            {
+                                caption: 'Despicable', path: 'img/Despicable.jpg',
+                                info: "Despicable Me is a 2010 American 3D computer-animated comedy film produced by Illumination Entertainment as its debut film and project and distributed by Universal Pictures. The film was animated by the French animation studio Mac Guff, which was later acquired by Illumination.[5] Directed by Pierre Coffin and Chris Renaud in their directorial debuts with a story by Sergio Pablos and screenplay by Cinco Paul and Ken Daurio, the film is eponymous with the main character and its theme song, composed by Pharrell Williams."
+                            }
+                            ] 
+                        }
+                        
+                    },
+                    // DO NOT EDIT - END
+
+                    methods: {
+                        computeTotal() {
+
+                           // Add Code Here
+
+                        }
+                    }
+
+                })
+    </script>
+
+    <!--- YOU MAY ADD CODE BELOW -->
+
+    <script>
+
+        app.component('custom-img', {
+
+                   // Add Code Here
+
+                })
+
+       
+
+        app.mount('#app')
+
+        
+
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

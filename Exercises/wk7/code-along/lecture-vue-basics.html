@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Lecture - Part I</title>
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- VueJS -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+     <!-- Axios -->
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        body {
+            width: 100%;
+            text-align: center;
+        }
+
+        .male {
+            background-color: rgb(160, 160, 212);
+            
+        }
+
+        .female {
+            background-color: pink;
+            
+        }
+        .center {
+            margin: 20px auto;
+            display: block;  
+        }
+    </style>
+
+    <script>
+        /*
+            1. Install Vue extension: Volar -- for auto-completion, Syntax-highlighting, Error Checking, etc.
+            2. Documentation -- https://v3.vuejs.org/
+            3. Importing Vue library from CDN
+            
+            4. Creating a Vue instance. 
+                Syntax:
+                    Vue.createApp( options ).mount('#app')
+                    
+                    options is an object containing 
+                        properties such as data, methods, mounted, computed
+                    
+                    [Vue instance is linked (mounted) to DOM element with id 'app']
+
+            5. Data binding -- for reactive updates -- when data changes, DOM changes
+                    property interpolation
+                    method interpolation 
+                    JS expression
+
+            [ Directives are special attributes reactively apply effects
+                to the DOM when the value of its expression changes ]
+
+            6. v-bind - bind an attribute value with a vue property
+                <img v-bind:src="myImg">
+
+            7. v-html - for displaying HTML content of a vue property
+                <div v-html="message"></div>
+
+            8. v-if - for conditionally rendering/displaying an element
+                <div v-if="1==1">Show this</div>
+                <div v-else>or this!</div>
+
+            9. v-on - event listening and handling, passing parameters
+                <button v-on:click="counter+1">Add</button>
+                
+            10. class and style bindings - 
+                v-bind:class='classProp'
+                v-bind:class = "[classProp, anotherClassProp]"
+                v-bind:class="{'classProp' : isActive}" 
+                v-bind:style="{'property':value}"
+        */ 
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Random User Generator</h1>
+
+        <img id="pic" v-bind:src="picture" alt="">
+
+        <div id="info"> 
+            {{ firstName + " " + lastName }}
+        </div>
+        <div>
+            {{email}}
+        </div>
+       
+        <!-- @ is short hand of v-on ie @click -->
+        <button v-on:click="getUser" class="m-2">Get Random User</button>
+
+        <!-- non vue.js -->
+        <!-- <button onclick="getUser()" class="m-2">Get Random User</button> -->
+    </div>
+
+    <script>
+
+        const vm = Vue.createApp(
+            //argument -> options object which are written in {key:value}
+            {
+                data() {
+                    return {
+                        url: "https://randomuser.me/api",
+                        title: "<span style='color:red;'>Random User Generator</span>",
+                        firstName: "",
+                        lastName: "",
+                        gender: "",
+                        email: "",
+                        picture: "",
+                        // Arial, Helvetica, sans-serif;
+                        // Georgia, 'Times New Roman', Times, serif
+                        font: "Arial, Helvetica, sans-serif",
+                        size: "1.5rem",
+                        button: "btn",
+                        theme: "btn-primary",
+                        type: "d-block",
+                        center: "mx-auto",
+                        randomIdx: 0,
+                        links: ["https://www.smu.edu.sg/", "https://www.ntu.edu.sg/", "https://www.nus.edu.sg/"]
+                
+                    }
+                },
+
+                methods: {
+                    getUser() {
+                        axios.get(this.url)
+
+                        .then(
+                            response => {
+                                console.log(response.data)
+
+                                let result = response.data.results[0] //locally defined variable
+                                this.picture = result.picture.medium
+
+                                this.email = result.email
+                                this.firstName = result.name.first
+                                this.lastName = result.name.last
+                                this.gender = result.gender
+
+                                console.log(this.picture)
+
+                                
+                            }
+                        )
+
+                        .catch (
+
+                        )
+                    }
+                }
+            }
+        )
+
+        const app = vm.mount('#app')
+
+
+        // not vue.js code
+        // var url = "https://randomuser.me/api"
+
+        // function getUser() {
+        //     axios.get(url)
+
+        //     .then(
+        //         response => {
+        //             console.log(response.data)
+
+        //             result = response.data.results[0]
+        //             picture = result.picture.medium
+
+        //             email = result.email
+        //             firstName = result.name.first
+        //             lastName = result.name.last
+        //             gender = result.gender
+
+        //             console.log(picture)
+
+        //             document.getElementById('pic').src = picture
+
+        //             document.getElementById('info').innerHTML = `
+        //                 ${firstName} ${lastName} <br>
+        //                  ${email} <br>
+        //                  ${gender}
+        //             `
+        //         }
+        //     )
+
+        //     .catch (
+
+        //     )
+
+        
+
+        /*
+            // You can make Axios call to the given URL to retrieve random user information
+            Data:
+                url: "https://randomuser.me/api",
+                title: "<span style='color:red;'>Random User Generator</span>",
+                firstName: "",
+                lastName: "",
+                gender: "",
+                email: "",
+                picture: "",
+                // Arial, Helvetica, sans-serif;
+                // Georgia, 'Times New Roman', Times, serif
+                font: "Arial, Helvetica, sans-serif",
+                size: "1.5rem",
+                button: "btn",
+                theme: "btn-primary",
+                type: "d-block",
+                center: "mx-auto",
+                randomIdx: 0,
+                links: ["https://www.smu.edu.sg/", "https://www.ntu.edu.sg/", "https://www.nus.edu.sg/"]
+        */
+
+        // Add Code Here
+       
+    
+    </script>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

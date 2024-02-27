@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fruits</title>
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+
+</head>
+<body>
+  <div id="app">
+    {{ message }} </br>
+
+    <template v-for="fruit in fruits">
+      {{ fruit }} <input type="radio" name="fruit"> 
+      <!-- add v-model="selectedFruit" if want to display value -->
+    </template>
+
+    <!-- {{ fruit1 }} <input type="radio" name="fruit">
+    {{ fruit2 }} <input type="radio" name="fruit">
+    {{ fruit3 }} <input type="radio" name="fruit"> -->
+
+    <!-- to display value of selected fruit -->
+    <!-- <div>Selected Fruit: {{ selectedFruit }}</div> -->
+
+</div>
+
+<script>
+  // Add Code Here
+
+  const app = Vue.createApp( {
+    data() {
+      return {
+        message : "Choose your favourite fruit:",
+        fruits : ["apple", "orange", "peach"],
+
+        // fruit1 : "apple",
+        // fruit2 : "orange",
+        // fruit3 : "peach",
+        
+        // to display selected fruit
+        // selectedFruit: ""
+      }
+    },
+    methods: {
+    }
+  })
+
+  const vm = app.mount("#app")
+
+</script>
+
+<!-- challenge: use array  -->
+ 
+</body>
+</html>

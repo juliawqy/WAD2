@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ex4</title>
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+     <!-- using CDN -->
+     <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+   
+    <div id="app">
+      
+      
+            <div class="mb-3">
+                <label for="desc" class="form-label">Task</label>
+                <input type="text" class="form-control" id="desc" v-model='desc' placeholder="task">
+            </div>
+            <div class="mb-3">
+                <label for="deadline" class="form-label">Deadline</label>
+                <input type="date" class="form-control" id="deadline" v-model='deadline' placeholder="deadline">
+            </div>
+        
+            <button type="button" @click="add" class="btn btn-primary">Add New Task</button>
+            <hr>
+            <task-tracker 
+            v-for='(task, idx) in taskList' 
+            v-bind:key='idx' 
+            v-bind:task='task' 
+            v-bind:idx='idx'
+            v-on:delete='deleteTask'
+            ></task-tracker>
+                 
+    </div>
+
+    <script>
+        const app = Vue.createApp({  // Vue instance - Vue Application
+            data() {
+                return {
+                    show: false,
+                    desc: '',
+                    deadline: '',
+                    taskList: []
+                }
+            },
+            methods: {
+                add() {
+                    this.taskList.push( { 'desc': this.desc, 'deadline': this.deadline } )
+                    this.desc = ''
+                    this.deadline = ''
+                },
+                deleteTask(idx) {
+                    this.taskList.splice(idx,1)
+                }
+            }
+        })
+
+        app.component('task-tracker', {  
+            props: ['task', 'idx'], /// just the requirement of task-tracker component as an input
+
+            emits: ['delete'], // defines output
+
+            methods: {
+                doS() {
+                    this.$emit('delete', this.idx)
+                    // if you need to emit multiple values, use object
+                    // this.$emit('delete', { idx: 1, name: "something"})
+
+                }
+            },
+          
+            template: `
+            <div class="card" style="width: 18rem;display:inline-block;">
+            <div class="card-body">
+                <h5 class="card-title">Deadline: {{task.deadline}}</h5>
+                <hr>
+                <p class="card-text">{{task.desc}}</p>
+                <button type="button" v-on:click="doS" class="btn btn-primary">Done</button>
+            </div>
+            </div>
+            `
+        })
+
+        app.mount('#app')
+
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

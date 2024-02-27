@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ClassStyleBinding</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+     
+     <style>
+        .redBox {
+            background-color: red;
+        }
+        .blueBox {
+            background-color: blue;
+        }
+
+        #demo1 {
+            color: white;
+        }
+
+        .demo2 {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Add code here -->
+    <div id="app">
+        <p id="demo1" :class="color">div ID: demo1</p>
+        <button id="demo1" :class="color" @click="changeColor()">Change Color</button>
+    </div>
+
+    <br>
+
+    <div>
+        <p id="demo2" class="demo2 redBox">div ID: demo2</p>
+        <button id="demo" class="demo2 redBox" onclick="changeColor2()">Change Color</button>
+    </div>
+
+</body>
+</html>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                color : "redBox"
+            }
+        },
+        methods: {
+            changeColor() {
+                if (this.color == "redBox") {
+                    this.color = "blueBox"
+                }
+                else {
+                    this.color = "redBox"
+                }
+            }
+        }
+
+    }).mount("#app")
+
+    function changeColor2() {
+        if (document.getElementById("demo2").className == "demo2 redBox") {
+            document.getElementById("demo2").className = "demo2 blueBox"
+            document.getElementById("demo").className = "demo2 blueBox"
+        }
+        else {
+            document.getElementById("demo2").className = "demo2 redBox"
+            document.getElementById("demo").className = "demo2 redBox"
+        }
+    }
+</script>

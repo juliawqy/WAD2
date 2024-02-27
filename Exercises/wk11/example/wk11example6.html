@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>slot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <!-- the content between the opening tag and closing tag will be used to fill in the slot -->
+        <alert-box>This is a warning—check it out!</alert-box>
+
+    </div>
+
+    <!-- 
+    The following demonstrates slots.
+    <slot></slot> will be replaced by the content of the comp-element above. 
+    -->
+
+    <script>
+        const app = Vue.createApp({
+            
+        });
+
+        app.component('alert-box', {
+            template: `<div class="alert alert-warning">
+                        <strong>Error!</strong>
+                        <slot></slot>
+                        </div>`
+        })
+
+        app.mount('#app')
+    </script>
+
+  
+    <!-- 
+        The following demonstrates named-slots. Note: the same functionality can be 
+        achieved using ‘props’ but it’s better (cleaner) to use slots when data needs not be manipulated.
+    -->
+
+    <div id="app2">
+        <book>
+            <template v-slot:author>
+                <h3>{{author}}</h3>
+            </template>
+            <template v-slot:title>
+                <h3>{{title}}</h3>
+            </template>
+           
+        </book>
+        <!-- 
+            the result is:
+            <div>
+                <h3>VusJS in Action</h3>
+                <h3>Erik Hanchett</h3>
+            </div>
+        -->
+
+        <comp>content</comp> <!-- .innerHTML = slot -->
+
+    </div>
+    <script>
+          const app2 = Vue.createApp({
+            data() {
+                return {
+                    title: 'VueJS in Action',
+                    author: 'Erik Hanchett'
+                }  
+            }
+        })
+
+        app2.component('book', {
+            template: `<div>
+                            <slot name='author'></slot>  
+                            <slot name='title'></slot>         
+                        </div>`
+        })
+
+        app2.component('comp', {
+            props: ['var'],
+            emits: [],
+
+            methods: {
+                foo() {
+                    this.var
+                }
+            },
+
+            template: `
+                <h1><slot></slot></h1>
+            `
+
+        })
+
+        app2.mount('#app2')
+    </script>
+
+<div id="app3">
+    <book>
+        <template v-slot:author>
+            {{author}}
+        </template>
+        <template v-slot:title>
+            {{title}}
+        </template>
+       
+    </book>
+    <!-- 
+        the result is:
+        <div>
+            <h3>VusJS in Action</h3>
+            <h3>Erik Hanchett</h3>
+        </div>
+    -->
+
+</div>
+<script>
+      const app3 = Vue.createApp({
+        data() {
+            return {
+                title: 'Alternative Slot Title',
+                author: 'Alternative Slot Author'
+            }  
+        }
+    })
+
+    app3.component('book', {
+        template: `<div>
+                        <h3><slot name='author'></slot>  </h3>
+                        <h3><slot name='title'></slot>   </h3>      
+                    </div>`
+    })
+
+    app3.mount('#app3')
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
