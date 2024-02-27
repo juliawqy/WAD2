@@ -1,0 +1,90 @@
+<!--
+    
+Name:   
+Email:  
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP CSS
+    -->
+    <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+
+    <title>Q1 - Grocery</title>
+
+    <!-- CSS (Use this section if you need to) -->
+    <style>
+
+        /* YOUR CSS CODE GOES HERE */
+        
+    </style>
+    
+</head>
+<body>
+
+    
+    <!--
+        YOUR CODE GOES HERE
+    -->
+
+    <div class="container" style="width: 80rem;">
+        <div class="row text-center" style="margin: 20px;" >
+            <h4>Shopping List</h4>
+        </div>
+        
+        <div class="row">
+            <div class="col form-control bg-light h-100" style="padding-top: 15px; padding-bottom: 15px; margin: 10px;">
+                <div class="row">
+                    <div class="col-10" style="padding-right: 15px; padding-left: 15px;">
+                        <div class="input-group w-10">
+                            <label class="form-control bg-body-secondary text-body-secondary" style="max-width: fit-content;" > What to Buy </label>
+                            <input id="item" class="form-control" type="text" placeholder="Enter item name">
+                        </div>
+                    </div>
+                    <div class="col-2" style="padding-right: 15px; padding-left: 0px;">
+                        <button class="btn btn-outline-info w-100" onclick="addItem()"> Add </button>
+                    </div>
+                </div>
+                <div class="row" >
+                    <ul id="itemList" style="list-style-type: none; padding-left: 15px; margin: 0px;"></ul>
+                </div>
+            </div>
+            <div class="col form-control bg-light" style="padding-top: 15px; padding-bottom: 15px; margin: 10px;">
+                <div class="row" style="padding-right: 15px; padding-left: 15px;">
+                    <b class="pb-2 px-0"> Calculate Total Amount </b>
+                </div>
+                <div class="row" style="padding-right: 15px; padding-left: 15px;">
+                    <button class="btn btn-outline-info w-100" style="max-width: fit-content;" onclick="processItems()"> Calculate </button>
+                </div>
+                <div class="row pt-2" id="itemPrice" style="padding-left: 15px;"></div>
+            </div>
+        </div>
+
+        <div class="row alert alert-danger" role="alert" id="alert" style="margin-left: 0px; display: none; width: 100%;"> 
+            You need to select items for calculation!
+        </div>
+        
+    </div>
+
+
+
+    
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP JAVASCRIPT
+     -->
+     <script src="../Bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL EXTERNAL JAVASCRIPT
+     -->
+     <script src="grocery.js"></script>
+
+</body>
+</html>
