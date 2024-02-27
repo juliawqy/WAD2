@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Bootstrap CSS, JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- TODO: insert axios script src -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <title>P1</title>
+</head>
+
+<body>
+    <div class="container">
+        Pokemon search: 
+        <input type="text" id="pokemonName">
+        <button type="submit" onclick="getPokemon()"> Search </button>
+        <hr>
+    </div>
+    <div id="main" class="container my-5">
+        <h1><span id="id-name"></span></h1>
+        <span id="id-picture"></span><br>
+        <span id="id-height"></span><br>
+        <span id="id-abilities"></span>
+    </div>
+
+    <script>
+    function getPokemon(){
+        let pokemonName = document.getElementById("pokemonName").value
+
+        if (pokemonName == "") {
+            return
+        }
+        else {
+
+            // TODO: insert code here
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+
+            .then (response => {
+                console.log(response.data)
+
+                var data = response.data
+                document.getElementById("id-name").innerText = data.name
+                document.getElementById("id-picture").innerHTML = `<img src="${data.sprites.front_default}">`
+                document.getElementById("id-height").innerText = "Height :" + data.height
+
+                var str = "Abilities: <ul>"
+
+                for (index in data.abilities) {
+                    str += `<li> ${data.abilities[index].ability.name} </li>`
+                }
+
+                str += "</ul>"
+
+                document.getElementById("id-abilities").innerHTML = str
+
+            })
+
+            .catch (error => {
+                console.log(error.message)
+            })
+        }
+
+    }
+    
+    getPokemon(); // call function
+    </script>
+</body>
+</html>

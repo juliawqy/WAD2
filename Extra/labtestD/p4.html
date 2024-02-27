@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Bootstrap CSS, JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- TODO: insert axios script src -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <title>P1</title>
+</head>
+
+<body>
+    <div id="main" >
+        <div class="container">
+            Pokemon search:
+            <input type="text" v-model="pokemonName" v-on:keyup.enter="getPokemon">
+            <button type="submit" @click="getPokemon"> Search </button>
+            <hr>
+        </div>
+        <div class="container my-5" v-if="searchSuccess">
+            <h1><span id=></span> {{pokemonSearch}} </h1>
+            <span>
+                <img :src="img_src">
+            </span><br>
+            <span> Height :{{height}}</span><br>
+            <span> 
+                Abilities:
+                <ul>
+                    <li v-for="index in abilities">
+                        {{index.ability.name}}
+                    </li>
+                </ul>
+            </span>
+        </div>
+        <div v-else> {{errorMsg}} </div>
+    </div>
+
+    <script>
+
+        Vue.createApp({
+            data() {
+                return {
+                    pokemonName : "",
+                    pokemonSearch : "",
+                    img_src : "",
+                    height : "",
+                    ability : [],
+                    searchSuccess : false,
+                    errorMsg : ""
+                }
+            },
+
+            methods: {
+                getPokemon() {
+                    console.log("cry")
+                    let pokemonSearch = this.pokemonName
+
+                    if (pokemonSearch == "") {
+                        return
+                    }
+                    else {
+
+                        // TODO: insert code here
+                        axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonSearch}`)
+
+                        .then (response => {
+                            console.log(response.data)
+
+                            this.searchSuccess = true
+
+                            var data = response.data
+                            this.pokemonSearch = data.name
+                            this.img_src = data.sprites.front_default
+                            this.height = data.height
+                            this.abilities = data.abilities
+
+                            console.log(this.abilities)
+
+                        })
+
+                        .catch (error => {
+                            console.log(error.message)
+                            this.searchSuccess = false
+                            this.errorMsg = "Pokemon not found 🥲"
+                        })
+                    }
+                }
+            }
+        }).mount("#main")
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Bootstrap CSS, JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- vue3 CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <title>I1</title>
+</head>
+
+<body>
+    <div id="main" class="container my-5">
+        <image-changer src1="./img/singapore.png" src2="./img/malaysia.png" interval=3 width=300 height=200 caption_pos="right" v-on:imgclick="onImgClick">Asia</image-changer><br>
+        <image-changer src1="./img/luxembourg.png" src2="./img/finland.png" interval=5 width=150 height=100 caption_pos="bottom" v-on:imgclick="onImgClick">Europe</image-changer>
+    </div>
+    <script>
+
+    // vue instance
+    const app = Vue.createApp({
+        data() {
+            return {}
+        },
+
+        methods: {
+            onImgClick() {
+                alert("event has been handled")
+            }
+        }
+
+    });
+    // vue component
+    app.component('image-changer',
+    {
+        data() {
+    	    return { 
+                // TODO: insert code
+                pic1 : true,
+                pic2 : false,
+                pos : "",
+                timeOut : 0
+            }
+        }, 
+        methods: {
+            changePict(){
+                // TODO: insert code
+                // hint: use setTimeout
+
+                this.timeOut = this.interval*1000
+                this.pos = this.caption_pos
+
+                setTimeout(() => {
+                    if (this.pic1) {
+                        this.pic1 = false
+                        this.pic2 = true
+                    }
+                    else {
+                        this.pic1 = true
+                        this.pic2 = false
+                    }
+                }, (this.timeOut))
+
+            }
+        },
+        props: ["src1", "src2", "interval", "caption_pos", "width", "height"],
+        emits: ["imgclick"],
+        template: `
+            <div v-if="pos == 'top'">
+                <slot></slot>
+                <br>
+            </div>
+            <slot v-if="pos == 'left'" ></slot>
+            <img v-if="pic1" :src="src1" v-on:load="changePict()" v-on:click="$emit('imgclick')" :width="width" :height="height">
+            <img v-else :src="src2" v-on:load="changePict()" v-on:click="$emit('imgclick')" :width="width" :height="height">
+            <slot v-if="pos == 'right'" ></slot>
+            <div v-if="pos == 'bottom'">
+                <br>
+                <slot></slot>
+            </div>
+        `,
+        created(){
+            
+        }
+    });          
+    // mount instance                 
+    const vm = app.mount("#main");
+    </script>
+</body>
+</html>
