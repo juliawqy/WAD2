@@ -1,0 +1,52 @@
+/*
+    Name:   YOUR NAME GOES HERE (LEE Oppa)
+    Email:  YOUR SMU EMAIL ID GOES HERE (lee.oppa.2020)
+*/
+
+/* DO NOT EDIT THIS BLOCK */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* YOU MAY WRITE YOUR OWN CSS CODE BELOW */
+
+.bgimg {
+    position: relative;
+}
+
+#beach {
+    width: 100%;
+}
+
+#russia {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+#ukraine {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.box {
+    position: absolute;
+    background-color: black;
+    color: white;
+    top: 30px;
+    right: 70px;
+    left: 70px;
+    align-items: center;
+    width: 50%;
+    height: 100px;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    font-size: 24px;
+}
