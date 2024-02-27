@@ -1,0 +1,83 @@
+<!--
+    
+Name:   
+Email:  
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP CSS
+    -->
+    <link rel="stylesheet" href="../Bootstrap/bootstrap.min.css">
+
+    <title>Q2 - Oscars</title>
+
+    <style>
+
+        /* YOUR CODE GOES HERE */
+        .headingBox {
+          align-items: center;
+          height: 100px;
+          width: 100%;
+          margin-top: 0%;
+          background-color: aqua;
+          display: flex;
+          justify-content: center;
+        }
+
+        /* TO VERT ALIGN: align-items: center; display: flex; justify-content: center; */
+
+    </style>
+
+</head>
+<body onload="showWinners()" >
+
+    
+    <!-- YOUR CODE GOES HERE -->
+
+     <div class="headingBox">
+          <h1 class="fw-bold"> Oscar Winners </h1>
+     </div>
+     <div class="container" style="margin-top: 20px; width: 200px; margin-bottom: 20px;">
+
+          <div class="dropdown show">
+               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="myDropdown" data-bs-toggle="dropdown" aria-expanded="false" >
+                    List of Decades
+               </a>
+               <div class="dropdown-menu" id="decadeList" aria-labelledby="dropdownMenuLink"></div>
+          </div>
+          
+     </div>
+
+     <div id="winners" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+     </div>
+
+     
+
+    
+    
+
+    
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL BOOTSTRAP JAVASCRIPT
+    -->
+    <script src="../Bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL AXIOS JAVASCRIPT
+    -->
+    <script src="axios.js"></script>
+
+    <!-- DO NOT REMOVE
+         REFERENCE TO LOCAL EXTERNAL JAVASCRIPT
+    -->
+    <script src="oscars.js"></script>
+
+</body>
+</html>
