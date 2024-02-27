@@ -1,0 +1,29 @@
+body {
+    margin: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+nav {
+    background-color: black;
+    padding: 10px;
+    margin: 0px;
+    font-size: small;
+}
+
+.links {
+    color: white;
+    text-decoration: none;
+    padding: 1%;
+}
+
+h2 {
+    color: brown;
+}
+
+.select {
+    background-color: yellow;
+}
+
+.textmar {
+    margin: 1%;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hehe</title>
+
+    <!-- style for whole page under head -->
+<style> 
+    p {
+        color:rgb(181, 192, 202);
+    }
+</style>
+
+
+</head>
+<body>
+
+    <!-- html provides content and structure -->
+    <h1 onclick='changeColor()' style="text-align: center; color: rgb(125, 191, 125);"> heehee </h1>
+    <p> super easy and fun </p>
+    <div id="unique">
+        <div style="border: solid black 1px;">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Dolor veritatis officia, ducimus reiciendis delectus harum. 
+            Minus consectetur a dolorem sunt, obcaecati et laudantium assumenda, 
+            quidem expedita aut, eveniet perferendis vero!
+        </div>
+
+        <div style="border: solid orange 1px;">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Dolor veritatis officia, ducimus reiciendis delectus harum. 
+            Minus consectetur a dolorem sunt, obcaecati et laudantium assumenda, 
+            quidem expedita aut, eveniet perferendis vero!
+        </div>
+    </div>
+
+    <!-- we call them elements or tags -->
+    <!-- type/name/id are called attributes, value of attribute/attribute values -->
+    <input type="color" name="" id="">
+
+    <!-- css provides presentation -->
+
+    <script>
+        function changeColor() {
+            document.getElementsByTagName('h1')[0].style.color='red' //the 0 means the 1st 'h1', index 0
+
+            document.getElementsByTagName('unique').textContent //??
+        }
+    </script>
+
+
+</body>
+</html>

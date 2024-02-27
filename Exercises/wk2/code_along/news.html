@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- <script src="news.js"></script> -->
+
+    <style>
+       /* 
+            ADD CODE HERE
+       */
+
+       body {
+        margin: 0;
+       }
+
+       .headerfooter {
+            background-color: beige;
+            text-align: center;
+            font-family:Arial, Helvetica, sans-serif;
+            padding: 15px 10px;
+       }
+
+       .highlight {
+        background-color: green;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        border: 5px solid black;
+       }
+
+       nav {
+        background-color: black;
+        padding: 5px;
+       }
+
+       h2 {
+        text-transform:uppercase;
+       }
+
+       .bar {
+        color: white;
+        margin-left: 10px;
+        text-decoration-line: none;
+       }
+
+       .author {
+        text-align: center;
+        background-color: bisque;
+       }
+
+       .autimg {
+        width: 200px;
+       }
+
+       .thumb {
+        width: 50px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+       }
+
+       .trump {
+        border: 1px solid black;
+        border-radius: 10%;
+        padding: 15px;
+       }
+
+       .yellow {
+        width: 400px;
+        height: 400px;
+        background-color: yellow;
+        position: relative;
+       }
+
+       .news {
+        width: 75px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%)
+
+       }
+
+    </style>
+
+</head>
+<body>
+    <!-- You are also allowed to add inline CSS below -->
+    <header class="headerfooter">Introductory Info</header>
+
+    <div class="highlight">
+        <h2 style="margin-top: 0; text-transform: uppercase;">Today's News</h2>
+        <!-- <span> element is used for inline CSS styling-->
+       <p>With a <span style="text-decoration: underline;">nice</span> layout</p>
+    </div>
+
+    <nav>
+        <a class="bar" href="#">Link</a>
+        <a class="bar" href="#">Link</a>
+        <a class="bar" href="#">Link</a>
+        <a class="bar" href="#">Link</a>
+    </nav>
+
+    <!-- content -->
+    <table>
+        <tr>
+            <!-- author part -->
+            <td class="author"> 
+                <h2>Author</h2>
+
+                <img class="autimg" src="img/journalist.png">
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                <h3>More News</h3>
+                <p>Lorem ipsum dolor sit amet</p>
+
+               
+                <img class="thumb" src="img/thumb_news.png">
+                <img class="thumb" src="img/thumb_news.png">
+                <img class="thumb" src="img/thumb_news.png">
+              
+
+
+            </td>
+            <!-- main content -->
+            <td>
+                <h2>Title Heading</h2>
+
+                <p>Title description, Aug 19, 2020</p>
+
+                <div class="trump">
+                    <a href="https://www.bbc.com/news/world-us-canada-53761744">
+                        <img style="width:90%;" src="img/news.png"></a>
+                </div>
+
+                <p style="width:80%;">Some text... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit quasi repellat repellendus minus nisi, maxime similique ad quia temporibus eveniet exercitationem, laboriosam tempore reprehenderit consectetur aperiam, et quas aliquid impedit!</p>
+
+                <h2>title heading</h2>
+                <p>Title description, Aug 24, 2022</p>
+
+                <div class="yellow">
+                    <img class="news" src="img/thumb_news.png" alt="">
+                    
+                </div>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+
+            </td>
+        </tr>
+    </table>
+
+    <footer class="headerfooter"> &copy; IS216</footer>  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

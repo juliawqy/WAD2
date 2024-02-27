@@ -1,0 +1,31 @@
+h2 {
+    color: blue;
+}
+
+h3 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table {
+    border: 5px solid black;
+    padding: 0px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 0px;
+}
+
+.cellbold {
+    font-weight: bold;
+}
+
+.redbox {
+    background-color: lightcoral;
+}
+
+.greenbox {
+    background-color: lightgreen;
+}

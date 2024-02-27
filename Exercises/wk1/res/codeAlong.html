@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1</title>
+​
+    <style>
+        p {
+            color: rgb(52, 76, 153);
+        }
+    </style>
+​
+</head>
+<body>
+    <!-- HTML / CSS / JS -->
+​
+    <!-- HTML provides content and structure-->
+​
+    <!-- CSS provides presentation -->
+​
+    <!-- JS makes things interactive / dynamic / reative -->
+    <h1 onclick="changeColor()" style="text-align: center; color: blue; text-decoration: underline;">This is a title</h1>
+​
+    <p style="color:red;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo fuga reiciendis, dolor ipsa vitae vero temporibus voluptates est ut. Beatae sit modi reprehenderit at ipsa incidunt distinctio cumque sunt quod!</p>
+​
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae sit, voluptates quis reiciendis optio dolorum esse pariatur repudiandae necessitatibus, eveniet rerum numquam? Quibusdam tempora voluptas natus incidunt est, odit pariatur.</p>
+​
+    <div id="unique">
+        <div style="border:solid black 1px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nobis repudiandae nam? Temporibus inventore necessitatibus reprehenderit error quasi optio ducimus at eveniet quae dolorum, voluptate explicabo dicta iste provident fugiat?</div>
+​
+        <div style="border:dashed orange 1px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nobis repudiandae nam? Temporibus inventore necessitatibus reprehenderit error quasi optio ducimus at eveniet quae dolorum, voluptate explicabo dicta iste provident fugiat?</div>
+    </div>
+​
+    <!-- we call these elements or tags -->
+    <!-- type/name/id are called attributes and attributes have values -->
+   <input type="color" name="" id="">
+​
+   
+​
+    <script>
+        function changeColor() {
+            document.getElementsByTagName('h1')[0].style.color = 'red'
+​
+            document.getElementById('unique')
+        }
+    </script>
+    
+</body>
+</html>
